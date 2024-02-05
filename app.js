@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const exemploRouter = require('./model/Exemplo');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
 
 mongoose.connect('mongodb://127.0.0.1:27017/lucas-1707131534180', {
   useNewUrlParser: true,
@@ -16,9 +16,9 @@ db.once('open', () => {
   console.log('Conectado ao MongoDB');
 });
 
-app.get('/', (req, res) => {
-  res.send('Bem-vindo ao seu servidor Node.js com MongoDB!');
-});
+app.use(express.json());
+
+app.use('/exemplo', exemploRouter);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
