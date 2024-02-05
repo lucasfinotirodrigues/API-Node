@@ -25,4 +25,13 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+    try {
+      const exemplo = await Exemplo.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      res.json(exemplo);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  });
+
 module.exports = router;
